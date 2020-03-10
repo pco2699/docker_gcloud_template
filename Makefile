@@ -3,7 +3,6 @@ PROJECT_ID=fuga
 GCP_ACCOUNT=xxx@xxx.com
 GOOGLE_COMPUTE_ZONE=asia-northeast1-a
 DOCKER_TAG="gcr.io/${PROJECT_ID}/${SEVICE_NAME}:latest"
-SERVICE_STATIC_IP="35.243.98.206"
 GCP_MACHINE_TYPE=f1-micro
 
 build:
@@ -24,8 +23,7 @@ create_with_container:
 	gcloud compute instances create-with-container ${SEVICE_NAME} \
     	--container-image ${DOCKER_TAG} \
     	--zone ${GOOGLE_COMPUTE_ZONE} \
-    	--boot-disk-size 10 \
-    	--address ${SERVICE_STATIC_IP}
+    	--boot-disk-size 10
 	gcloud compute instances add-tags ${SEVICE_NAME} \
     	--zone ${GOOGLE_COMPUTE_ZONE} \
     	--tags http-server,https-server
